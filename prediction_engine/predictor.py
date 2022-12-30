@@ -88,6 +88,7 @@ class Predictor:
                 #   then sample future opponents to determine if sampled
                 #   score projection will beat them as well
                 if projection < score_to_beat:
+
                     # sample future opponents
                     min_val = float('inf')
                     for _ in range(opponents_left):

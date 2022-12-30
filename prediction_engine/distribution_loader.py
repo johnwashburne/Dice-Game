@@ -1,3 +1,6 @@
+# Utilize a bottom-up strategy to build sampling distributions of
+#   expected points added by number dice rolled.
+
 import numpy as np
 from typing import Dict, Optional
 import os
@@ -5,6 +8,10 @@ import json
 
 
 class Distribution:
+
+    """
+    Class to hold distributions and metadata
+    """
 
     def __init__(
             self,
@@ -27,7 +34,7 @@ class DistributionLoader:
             name: Optional[str] = None
             ) -> Distribution:
         """
-        Build sampling distributions for additional points by number
+        Build sampling distributions for expected additional points by number
             of dice rolled
         Args:
             num_dice(int): build distributions for each number of dice rolled
@@ -81,6 +88,8 @@ class DistributionLoader:
             distributions.append(np.array(samples))
 
         distributions = np.array(distributions)
+
+        # store distribution and metadata
         if name is not None:
             info = {}
             binary_path = os.path.join(base_path, "distributions\\binaries", f"{name}.npy")
@@ -97,6 +106,13 @@ class DistributionLoader:
 
     @staticmethod
     def load(name: str) -> Distribution:
+        """
+        Load distribution and metadata
+        Args:
+            name(str): name of stored distribution
+        Returns:
+            Distribution: object containing distribution and metadata
+        """
 
         base_path = os.path.dirname(os.path.realpath(__file__))
 
