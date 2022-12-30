@@ -67,8 +67,9 @@ class DistributionLoader:
                 # begin with keeping all dice
                 min_points = sum(roll)
                 for j in range(len(roll) - 1):
+
                     # keep the lowest j+1 points
-                    kept_points = roll[:j+2]
+                    kept_points = roll[:j+1]
 
                     # reroll the remaining dice, using the previously
                     #   built sampling distribution
@@ -142,4 +143,4 @@ if __name__ == "__main__":
         5: 5,
         6: 6
     }
-    DistributionLoader.build(5, point_mapping, 100000, "default")
+    DistributionLoader.build(5, point_mapping, 1000000, "default")
