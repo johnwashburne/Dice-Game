@@ -13,7 +13,8 @@ Additionally, when using the naive method, I noticed that the distribution for p
 Now, using these distributions, it is easy to run several simulation trials. Taking in the player's current dice roll and current saved points, the score to beat, and the number of players left, the program iterates through the different possibilities of dice to keep. It samples from the distribution corresponding to the dice remaining, determines if the new sample total points beats the high score, and if so, samples the number of points the other players. If the current player's sample score is lower than the other players' sampled scores, this action resulted in a win for this particular sample. Repeated over several samples for each possibility of dice to keep, we can determine which action won in the highest number of samples and present that action to the player as the best in order for the player to win the game.
 ## Use
 The predictor can be used by cloning the repository, importing the Predictor and DistributionLoader class, and using the optimize_turn method from the Predictor class. Example taken from `main.py`:
-```from prediction_engine import DistributionLoader, Predictor
+```
+from prediction_engine import DistributionLoader, Predictor
 
 if __name__ == "__main__":
     p = Predictor(DistributionLoader.load("default"))
@@ -24,3 +25,4 @@ if __name__ == "__main__":
         dice=[4, 3, 1, 1, 2]
     ))
 ```
+Also, a minimal flask API is included, which I intend to use at some point with a web app so I can easily share the functionality with my family members.
