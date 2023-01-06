@@ -26,5 +26,6 @@ if __name__ == "__main__":
     ))
 ```
 
-The output of this program is `([3], 0.1351)`, where `[3]` is the dice to keep and `0.1351` is the proportion of samples with a winning outcome \
+The output of this program is `([3], 0.1351)`, where `[3]` is the dice to keep and `0.1351` is the proportion of samples with a winning outcome. \
+\
 Also, a minimal flask API is included, which I intend to use at some point with a web app so I can easily share the functionality with my family members.
