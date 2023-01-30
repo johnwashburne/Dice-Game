@@ -2,7 +2,7 @@
 #   expected points added by number dice rolled.
 
 import numpy as np
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
 import os
 import json
 
@@ -53,7 +53,7 @@ class DistributionLoader:
         base_path = os.path.dirname(os.path.realpath(__file__))
 
         # needs to be of length num_samples to make array conversion possible
-        distributions = [np.array([0] * num_samples)]
+        distribution_list = [np.array([0] * num_samples)]
         face_values = list(point_mapping.keys())
 
         for i in range(1, num_dice+1):
@@ -75,7 +75,7 @@ class DistributionLoader:
                     #   built sampling distribution
                     num_remaining_dice = len(roll) - len(kept_points)
                     points = sum(kept_points) + np.random.choice(
-                        distributions[num_remaining_dice])
+                        distribution_list[num_remaining_dice])
 
                     # Play optimally, keep the minimum possible number
                     #   of points. Note: this knowledge would not be
@@ -86,13 +86,13 @@ class DistributionLoader:
                     min_points = min(min_points, points)
                 samples.append(min_points)
 
-            distributions.append(np.array(samples))
+            distribution_list.append(np.array(samples))
 
-        distributions = np.array(distributions)
+        distributions = np.array(distribution_list)
 
         # store distribution and metadata
         if name is not None:
-            info = {}
+            info: Dict[str, Any] = {}
             binary_path = os.path.join(base_path, "distributions\\binaries", f"{name}.npy")
             info["bin"] = binary_path
             info["point_mapping"] = point_mapping
